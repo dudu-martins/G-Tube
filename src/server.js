@@ -26,7 +26,25 @@ export function createApp(config, dependencies) {
     if (req.originalUrl.length > 4096) return res.sendStatus(414);
     next();
   });
+  import path from 'node:path';
+  import { fileURLToPath } from 'node:url';
 
+  const __dirname = path.dirname(fileURLToPath(import.meta.url));
+
+  export function createApp(config, dependencies) {
+    const app = express();
+    app.disable('x-powered-by');
+
+    app.use(express.static(path.join(__dirname, '..', 'public'), {
+    maxAge: '1d',
+    setHeaders: (res, filePath) => {
+      if (filePath.endsWith('.png')) {
+        res.set('Content-Type', 'image/png');
+      }
+    }
+   }));
+
+  // ... resto do seu código atual
   app.get('/health', (_req, res) => res.json({ status: 'ok', version: '1.0.0', name: 'G-Tube' }));
 
   const addon = createAddon(config, dependencies);
