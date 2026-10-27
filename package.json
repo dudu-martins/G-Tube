@@ -1,0 +1,19 @@
+{
+  "name": "g-tube-stremio",
+  "version": "1.0.0",
+  "private": true,
+  "description": "G-Tube – Stremio addon for gay sections of XVideos and xHamster with duration filters",
+  "type": "module",
+  "engines": { "node": ">=18" },
+  "scripts": {
+    "start": "node src/server.js",
+    "test": "node --test"
+  },
+  "dependencies": {
+    "cheerio": "1.2.0",
+    "express": "4.22.3",
+    "stremio-addon-sdk": "1.6.10",
+    "youtube-dl-exec": "3.1.15"
+  },
+  "license": "MIT"
+}

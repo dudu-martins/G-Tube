@@ -1,0 +1,22 @@
+services:
+  - type: web
+    name: g-tube
+    runtime: node
+    plan: free
+    buildCommand: npm install
+    startCommand: npm start
+    envVars:
+      - key: NODE_VERSION
+        value: "20"
+      - key: HOST
+        value: "0.0.0.0"
+      - key: CACHE_TTL_SECONDS
+        value: "300"
+      - key: MAX_RESULTS
+        value: "40"
+      - key: MAX_STREAMS
+        value: "3"
+      - key: REQUEST_TIMEOUT_MS
+        value: "15000"
+      - key: EXTRACT_TIMEOUT_MS
+        value: "30000"
