@@ -1,9 +1,13 @@
 import express from 'express';
 import sdk from 'stremio-addon-sdk';
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
 import { timingSafeEqual } from 'node:crypto';
 import { pathToFileURL } from 'node:url';
 import { loadConfig } from './config.js';
 import { createAddon } from './addon.js';
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 const matches = (value, expected) => {
   const a = Buffer.from(value || '');
@@ -14,6 +18,9 @@ const matches = (value, expected) => {
 export function createApp(config, dependencies) {
   const app = express();
   app.disable('x-powered-by');
+  app.use(express.static(path.join(__dirname, '..', 'public'), {
+    maxAge: '1d'
+  }));
   app.use((req, res, next) => {
     res.set('Access-Control-Allow-Origin', '*');
     res.set('X-Content-Type-Options', 'nosniff');
@@ -26,11 +33,7 @@ export function createApp(config, dependencies) {
     if (req.originalUrl.length > 4096) return res.sendStatus(414);
     next();
   });
-  import path from 'node:path';
-  import { fileURLToPath } from 'node:url';
-
-  const __dirname = path.dirname(fileURLToPath(import.meta.url));
-
+  
   export function createApp(config, dependencies) {
     const app = express();
     app.disable('x-powered-by');
