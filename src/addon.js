@@ -45,6 +45,7 @@ export function createAddon(config, dependencies = {}) {
     name: 'G-Tube',
     description:
       'Browse and play gay videos from XVideos and xHamster with duration filters. Self-hosted personal use only.',
+    logo: 'https://g-tube-2nxs.onrender.com/logo.png',
     resources: ['catalog', 'meta', 'stream'],
     types: ['Porn'],
     idPrefixes: ['g-tube:'],
